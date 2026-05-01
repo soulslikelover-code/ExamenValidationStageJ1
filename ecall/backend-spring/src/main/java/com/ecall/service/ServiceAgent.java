@@ -1,5 +1,6 @@
 package com.ecall.service;
 
+import com.ecall.config.PasswordUtil;
 import com.ecall.model.Agent;
 import com.ecall.repository.AgentRepository;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ public class ServiceAgent {
     }
 
     public Agent ajouter(Agent agent) {
+        agent.setMotDePasse(PasswordUtil.hash(agent.getMotDePasse()));
         return agentRepository.save(agent);
     }
 
@@ -24,7 +26,9 @@ public class ServiceAgent {
         existant.setNom(agent.getNom());
         existant.setPrenom(agent.getPrenom());
         existant.setEmail(agent.getEmail());
-        existant.setMotDePasse(agent.getMotDePasse());
+        if (agent.getMotDePasse() != null && !agent.getMotDePasse().isEmpty()) {
+            existant.setMotDePasse(PasswordUtil.hash(agent.getMotDePasse()));
+        }
         existant.setTelephone(agent.getTelephone());
         existant.setStatut(agent.getStatut());
         return agentRepository.save(existant);
@@ -39,6 +43,7 @@ public class ServiceAgent {
     }
 
     public Optional<Agent> connecter(String email, String motDePasse) {
-        return agentRepository.findByEmailAndMotDePasse(email, motDePasse);
+        return agentRepository.findByEmail(email)
+                .filter(a -> PasswordUtil.matches(motDePasse, a.getMotDePasse()));
     }
 }

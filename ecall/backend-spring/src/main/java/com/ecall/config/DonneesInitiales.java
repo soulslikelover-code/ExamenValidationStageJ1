@@ -17,7 +17,7 @@ public class DonneesInitiales {
                 admin.setNom("Admin");
                 admin.setPrenom("Principal");
                 admin.setEmail("admin@gmail.com");
-                admin.setMotDePasse("azerty");
+                admin.setMotDePasse(PasswordUtil.hash("azerty"));
                 admin.setTelephone("00000000");
                 admin.setStatut("ACTIF");
                 administrateurRepository.save(admin);

@@ -4,8 +4,7 @@ import com.ecall.model.*;
 import com.ecall.service.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/connexion")
@@ -31,15 +30,21 @@ public class ControleurConnexion {
 
     @PostMapping("/agent")
     public ResponseEntity<?> connexionAgent(@RequestBody Agent agent) {
-        return serviceAgent.connecter(agent.getEmail(), agent.getMotDePasse())
+        Optional<Agent> agentTrouve = serviceAgent.connecter(agent.getEmail(), agent.getMotDePasse());
+        if (agentTrouve.isPresent()) return ResponseEntity.ok(agentTrouve.get());
+
+        return serviceAdministrateur.connecter(agent.getEmail(), agent.getMotDePasse())
                 .<ResponseEntity<?>>map(a -> ResponseEntity.ok(a))
                 .orElse(ResponseEntity.status(401).body("Identifiants agent incorrects"));
     }
 
     @PostMapping("/client")
     public ResponseEntity<?> connexionClient(@RequestBody Client client) {
-        return serviceClient.connecter(client.getEmail(), client.getMotDePasse())
-                .<ResponseEntity<?>>map(c -> ResponseEntity.ok(c))
+        Optional<Client> clientTrouve = serviceClient.connecter(client.getEmail(), client.getMotDePasse());
+        if (clientTrouve.isPresent()) return ResponseEntity.ok(clientTrouve.get());
+
+        return serviceAdministrateur.connecter(client.getEmail(), client.getMotDePasse())
+                .<ResponseEntity<?>>map(a -> ResponseEntity.ok(a))
                 .orElse(ResponseEntity.status(401).body("Identifiants client incorrects"));
     }
 }

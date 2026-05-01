@@ -1,9 +1,9 @@
 package com.ecall.service;
 
+import com.ecall.config.PasswordUtil;
 import com.ecall.model.Client;
 import com.ecall.repository.ClientRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +17,7 @@ public class ServiceClient {
     }
 
     public Client inscrire(Client client) {
+        client.setMotDePasse(PasswordUtil.hash(client.getMotDePasse()));
         return clientRepository.save(client);
     }
 
@@ -25,7 +26,8 @@ public class ServiceClient {
     }
 
     public Optional<Client> connecter(String email, String motDePasse) {
-        return clientRepository.findByEmailAndMotDePasse(email, motDePasse);
+        return clientRepository.findByEmail(email)
+                .filter(c -> PasswordUtil.matches(motDePasse, c.getMotDePasse()));
     }
 
     public List<Client> lister() {
@@ -37,7 +39,9 @@ public class ServiceClient {
         existant.setNom(client.getNom());
         existant.setPrenom(client.getPrenom());
         existant.setEmail(client.getEmail());
-        existant.setMotDePasse(client.getMotDePasse());
+        if (client.getMotDePasse() != null && !client.getMotDePasse().isEmpty()) {
+            existant.setMotDePasse(PasswordUtil.hash(client.getMotDePasse()));
+        }
         existant.setTelephone(client.getTelephone());
         return clientRepository.save(existant);
     }
