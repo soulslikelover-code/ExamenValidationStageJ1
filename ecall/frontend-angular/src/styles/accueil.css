@@ -48,27 +48,26 @@
 
 .admin-panel-btn {
   position: fixed;
-  top: 128px;
-  right: 6px;
+  top: 8px;
+  right: 8px;
   z-index: 201;
   background: var(--primary);
   color: white;
   font-family: var(--font-display);
-  font-size: 0.68rem;
+  font-size: 0.62rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 0.45rem 0.8rem;
-  border-radius: 4px;
+  padding: 0.35rem 0.6rem;
+  border-radius: 3px;
   text-decoration: none;
   display: flex;
   align-items: center;
-  gap: 0.3rem;
-  box-shadow: 0 4px 16px rgba(255,69,0,0.4);
+  gap: 0.25rem;
   transition: all 0.2s ease;
   white-space: nowrap;
+  box-shadow: none;
 }
-
 .admin-panel-btn:hover {
   background: var(--primary-light);
   transform: translateY(-1px);
