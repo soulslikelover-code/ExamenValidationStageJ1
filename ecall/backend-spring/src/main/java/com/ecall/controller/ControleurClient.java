@@ -4,13 +4,11 @@ import com.ecall.model.Client;
 import com.ecall.service.ServiceClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/clients")
-@CrossOrigin(origins = "http://localhost:4200")
 public class ControleurClient {
 
     private final ServiceClient serviceClient;
@@ -25,15 +23,11 @@ public class ControleurClient {
         if (existant.isPresent()) {
             return ResponseEntity.status(409).body("Cet email existe déjà");
         }
-
-        Client nouveauClient = serviceClient.inscrire(client);
-        return ResponseEntity.ok(nouveauClient);
+        return ResponseEntity.ok(serviceClient.inscrire(client));
     }
 
     @GetMapping
-    public List<Client> lister() {
-        return serviceClient.lister();
-    }
+    public List<Client> lister() { return serviceClient.lister(); }
 
     @PutMapping("/{id}")
     public Client modifier(@PathVariable Long id, @RequestBody Client client) {

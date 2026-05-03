@@ -7,7 +7,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/appels")
-@CrossOrigin(origins = "http://localhost:4200")
 public class ControleurAppel {
 
     private final ServiceAppel serviceAppel;
@@ -22,7 +21,5 @@ public class ControleurAppel {
     }
 
     @GetMapping
-    public List<Appel> lister() {
-        return serviceAppel.lister();
-    }
+    public List<Appel> lister() { return serviceAppel.lister(); }
 }

@@ -7,7 +7,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/administrateurs")
-@CrossOrigin(origins = "http://localhost:4200")
 public class ControleurAdministrateur {
 
     private final ServiceAdministrateur serviceAdministrateur;

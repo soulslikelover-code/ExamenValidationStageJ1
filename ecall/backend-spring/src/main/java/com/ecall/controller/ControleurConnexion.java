@@ -8,7 +8,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/connexion")
-@CrossOrigin(origins = "http://localhost:4200")
 public class ControleurConnexion {
 
     private final ServiceAdministrateur serviceAdministrateur;
@@ -32,7 +31,6 @@ public class ControleurConnexion {
     public ResponseEntity<?> connexionAgent(@RequestBody Agent agent) {
         Optional<Agent> agentTrouve = serviceAgent.connecter(agent.getEmail(), agent.getMotDePasse());
         if (agentTrouve.isPresent()) return ResponseEntity.ok(agentTrouve.get());
-
         return serviceAdministrateur.connecter(agent.getEmail(), agent.getMotDePasse())
                 .<ResponseEntity<?>>map(a -> ResponseEntity.ok(a))
                 .orElse(ResponseEntity.status(401).body("Identifiants agent incorrects"));
@@ -42,7 +40,6 @@ public class ControleurConnexion {
     public ResponseEntity<?> connexionClient(@RequestBody Client client) {
         Optional<Client> clientTrouve = serviceClient.connecter(client.getEmail(), client.getMotDePasse());
         if (clientTrouve.isPresent()) return ResponseEntity.ok(clientTrouve.get());
-
         return serviceAdministrateur.connecter(client.getEmail(), client.getMotDePasse())
                 .<ResponseEntity<?>>map(a -> ResponseEntity.ok(a))
                 .orElse(ResponseEntity.status(401).body("Identifiants client incorrects"));

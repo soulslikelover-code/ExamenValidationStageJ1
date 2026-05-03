@@ -7,7 +7,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/agents")
-@CrossOrigin(origins = "http://localhost:4200")
 public class ControleurAgent {
 
     private final ServiceAgent serviceAgent;
