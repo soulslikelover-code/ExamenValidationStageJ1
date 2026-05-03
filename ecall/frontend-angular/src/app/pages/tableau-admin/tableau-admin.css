@@ -1,0 +1,18 @@
+.conteneur {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.btn {
+  display: inline-block;
+  margin: 8px 8px 8px 0;
+  padding: 10px 16px;
+  background: #212529;
+  color: white;
+  text-decoration: none;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}

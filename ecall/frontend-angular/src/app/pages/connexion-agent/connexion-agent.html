@@ -1,0 +1,29 @@
+<div class="auth-page">
+  <div class="auth-container">
+    <a routerLink="/" class="auth-back">Retour à l'accueil</a>
+
+    <div class="auth-logo">
+      <div class="auth-logo-text">E<span>·</span>Call</div>
+    </div>
+
+    <div class="auth-card">
+      <div class="role-badge role-agent">◈ Espace agent</div>
+      <h1 class="auth-title">Connexion</h1>
+      <p class="auth-subtitle">Accédez à votre espace agent</p>
+
+      <div class="form-group">
+        <label class="form-label">Adresse email</label>
+        <input type="email" [(ngModel)]="email" class="form-control" placeholder="agent@exemple.com">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Mot de passe</label>
+        <input type="password" [(ngModel)]="motDePasse" class="form-control" placeholder="••••••••">
+      </div>
+
+      <button class="btn btn-primary btn-block" (click)="connecter()">Se connecter</button>
+
+      <p class="message">{{ message }}</p>
+    </div>
+  </div>
+</div>

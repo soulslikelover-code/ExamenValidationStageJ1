@@ -1,0 +1,81 @@
+<div class="dashboard">
+  <aside class="sidebar">
+    <div class="sidebar-logo">E<span>·</span>Call</div>
+
+    <div class="sidebar-section-label">Navigation</div>
+    <ul class="sidebar-nav">
+      <li><a routerLink="/admin" class="active"><span class="nav-icon">◉</span> Tableau de bord</a></li>
+      <li><a routerLink="/admin/agents"><span class="nav-icon">👥</span> Agents</a></li>
+      <li><a routerLink="/admin/administrateurs"><span class="nav-icon">⚡</span> Administrateurs</a></li>
+      <li><a routerLink="/admin/clients"><span class="nav-icon">👤</span> Clients</a></li>
+    </ul>
+
+    <div class="sidebar-spacer"></div>
+
+    <div class="sidebar-user">
+      <div class="user-avatar">AD</div>
+      <div>
+        <div class="user-name">Administrateur</div>
+        <div class="user-role">Super Admin</div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="dashboard-main">
+    <div class="dashboard-header">
+      <div>
+        <h1 class="dashboard-title">Tableau de bord</h1>
+        <p class="dashboard-subtitle">Vue d'ensemble de la plateforme</p>
+      </div>
+      <a routerLink="/" class="btn btn-secondary btn-sm">Déconnexion</a>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-box stat-box-accent">
+        <div class="stat-box-value">{{ clients.length }}</div>
+        <div class="stat-box-label">Clients</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-value">{{ agents.length }}</div>
+        <div class="stat-box-label">Agents</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-value">{{ administrateurs.length }}</div>
+        <div class="stat-box-label">Admins</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">Clients récents</div>
+        <a routerLink="/admin/clients" class="btn btn-secondary btn-sm">Voir tout</a>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Statut</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let client of clients.slice(0,5)">
+            <td>{{ client.nom }} {{ client.prenom }}</td>
+            <td>{{ client.email }}</td>
+            <td><span class="badge badge-success">{{ client.statut }}</span></td>
+            <td>
+              <div class="action-btns">
+                <button class="btn btn-danger btn-sm" (click)="supprimerClient(client.id)">Supprimer</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="empty-state" *ngIf="clients.length === 0">
+        <div class="empty-state-icon">👤</div>
+        <div class="empty-state-text">Aucun client enregistré</div>
+      </div>
+    </div>
+  </main>
+</div>

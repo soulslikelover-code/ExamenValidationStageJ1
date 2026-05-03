@@ -1,0 +1,50 @@
+<div class="auth-page">
+  <div class="auth-container">
+    <a routerLink="/" class="auth-back">Retour à l'accueil</a>
+
+    <div class="auth-logo">
+      <div class="auth-logo-text">E<span>·</span>Call</div>
+    </div>
+
+    <div class="auth-card">
+      <div class="role-badge role-client">✓ Nouveau compte</div>
+      <h1 class="auth-title">Inscription</h1>
+      <p class="auth-subtitle">Créez votre compte client en quelques secondes</p>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Nom</label>
+          <input type="text" [(ngModel)]="nom" class="form-control" placeholder="Dupont">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Prénom</label>
+          <input type="text" [(ngModel)]="prenom" class="form-control" placeholder="Jean">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Adresse email</label>
+        <input type="email" [(ngModel)]="email" class="form-control" placeholder="vous@exemple.com">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Mot de passe</label>
+        <input type="password" [(ngModel)]="motDePasse" class="form-control" placeholder="••••••••">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Téléphone</label>
+        <input type="text" [(ngModel)]="telephone" class="form-control" placeholder="+261 XX XXX XXXX">
+      </div>
+
+      <button class="btn btn-primary btn-block" (click)="inscrire()">Créer mon compte</button>
+
+      <p class="message" [class.success]="message === 'Inscription réussie'">{{ message }}</p>
+
+      <div class="auth-divider"><span>ou</span></div>
+      <div class="auth-footer">
+        Déjà inscrit ? <a routerLink="/connexion">Se connecter</a>
+      </div>
+    </div>
+  </div>
+</div>

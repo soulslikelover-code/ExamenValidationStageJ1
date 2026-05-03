@@ -1,0 +1,103 @@
+<div class="dashboard">
+  <aside class="sidebar">
+    <div class="sidebar-logo">E<span>·</span>Call</div>
+
+    <div class="sidebar-section-label">Navigation</div>
+    <ul class="sidebar-nav">
+      <li><a routerLink="/admin"><span class="nav-icon">◉</span> Tableau de bord</a></li>
+      <li><a routerLink="/admin/agents"><span class="nav-icon">👥</span> Agents</a></li>
+      <li><a routerLink="/admin/administrateurs" class="active"><span class="nav-icon">⚡</span> Administrateurs</a></li>
+      <li><a routerLink="/admin/clients"><span class="nav-icon">👤</span> Clients</a></li>
+    </ul>
+
+    <div class="sidebar-spacer"></div>
+    <div class="sidebar-user">
+      <div class="user-avatar">AD</div>
+      <div>
+        <div class="user-name">Administrateur</div>
+        <div class="user-role">Super Admin</div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="dashboard-main">
+    <div class="dashboard-header">
+      <div>
+        <h1 class="dashboard-title">Gestion des administrateurs</h1>
+        <p class="dashboard-subtitle">{{ administrateurs.length }} administrateur(s) enregistré(s)</p>
+      </div>
+      <a routerLink="/admin" class="btn btn-secondary btn-sm">← Retour</a>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">{{ modificationId ? 'Modifier un administrateur' : 'Ajouter un administrateur' }}</div>
+      </div>
+      <div class="panel-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Nom</label>
+            <input type="text" [(ngModel)]="nom" class="form-control" placeholder="Dupont">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Prénom</label>
+            <input type="text" [(ngModel)]="prenom" class="form-control" placeholder="Jean">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" [(ngModel)]="email" class="form-control" placeholder="admin@exemple.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Téléphone</label>
+            <input type="text" [(ngModel)]="telephone" class="form-control" placeholder="+261 XX XXX XXXX">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Mot de passe {{ modificationId ? '(laisser vide pour ne pas changer)' : '' }}</label>
+          <input type="password" [(ngModel)]="motDePasse" class="form-control" placeholder="••••••••">
+        </div>
+        <div class="action-btns">
+          <button class="btn btn-primary" (click)="ajouter()">{{ modificationId ? 'Enregistrer' : 'Ajouter' }}</button>
+          <button *ngIf="modificationId" class="btn btn-secondary" (click)="reset()">Annuler</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">Liste des administrateurs</div>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Téléphone</th>
+            <th>Statut</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let admin of administrateurs">
+            <td>{{ admin.nom }} {{ admin.prenom }}</td>
+            <td>{{ admin.email }}</td>
+            <td>{{ admin.telephone }}</td>
+            <td><span class="badge badge-primary">{{ admin.statut }}</span></td>
+            <td>
+              <div class="action-btns">
+                <button class="btn btn-warning btn-sm" (click)="editer(admin)">Modifier</button>
+                <button class="btn btn-danger btn-sm" (click)="supprimer(admin.id)">Supprimer</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="empty-state" *ngIf="administrateurs.length === 0">
+        <div class="empty-state-icon">⚡</div>
+        <div class="empty-state-text">Aucun administrateur enregistré.</div>
+      </div>
+    </div>
+  </main>
+</div>
