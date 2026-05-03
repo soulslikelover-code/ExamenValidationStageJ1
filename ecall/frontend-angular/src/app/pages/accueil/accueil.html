@@ -3,18 +3,22 @@
   <ul class="navbar-links">
     <li><a routerLink="/inscription">Inscription</a></li>
     <li><a routerLink="/connexion">Espace client</a></li>
-    <li><a routerLink="/admin/connexion" class="btn btn-primary btn-sm">Admin</a></li>
   </ul>
 </nav>
 
+<div class="page-fold"></div>
+<a routerLink="/admin/connexion" class="admin-panel-btn">Admin Panel</a>
+
 <div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
   <div class="hero-inner">
     <div class="hero-content">
       <div class="hero-tag">Plateforme Call Center</div>
       <h1 class="hero-title">
         Support client<br>
         <span class="accent">intelligent</span><br>
-        & réactif
+        &amp; réactif
       </h1>
       <p class="hero-subtitle">
         Gérez vos appels, vos agents et vos clients depuis une interface unifiée, moderne et performante.
@@ -24,7 +28,6 @@
         <a routerLink="/connexion" class="btn btn-secondary btn-lg">Se connecter</a>
       </div>
     </div>
-
     <div class="hero-visual">
       <div class="hero-card-stack">
         <div class="stat-card">
@@ -44,6 +47,42 @@
   </div>
 </div>
 
+<div class="tech-section">
+  <div class="tech-item">
+    <div class="tech-img-wrap">
+      <img src="headset.jpg" alt="Casque professionnel" class="tech-img">
+    </div>
+    <div class="tech-content">
+      <div class="tech-quote">"La voix est le canal le plus humain du service client."</div>
+      <div class="tech-label">Casques professionnels</div>
+      <div class="tech-desc">Audio haute définition pour des échanges clairs et sans interruption.</div>
+    </div>
+  </div>
+
+  <div class="tech-item tech-item--reverse">
+    <div class="tech-img-wrap">
+      <img src="phone.jpg" alt="Téléphone call center" class="tech-img">
+    </div>
+    <div class="tech-content">
+      <div class="tech-quote">"Chaque appel est une opportunité de créer de la confiance."</div>
+      <div class="tech-label">Téléphones call center</div>
+      <div class="tech-desc">Équipements dédiés pour une communication fluide et professionnelle.</div>
+    </div>
+  </div>
+
+  <div class="tech-item">
+    <div class="tech-img-wrap">
+      <img src="laptop.jpg" alt="Ordinateur portable" class="tech-img">
+    </div>
+    <div class="tech-content">
+      <div class="tech-quote">"La technologie au service de l'humain, jamais l'inverse."</div>
+      <div class="tech-label">Ordinateurs portables</div>
+      <div class="tech-desc">Interfaces modernes pour que nos agents soient toujours efficaces.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
 <div class="features">
   <div class="features-header">
     <div class="section-label">Ce que nous offrons</div>
@@ -73,6 +112,7 @@
   </div>
 </div>
 
+<!-- CTA -->
 <div class="cta-banner">
   <div>
     <div class="cta-title">Prêt à commencer ?</div>
