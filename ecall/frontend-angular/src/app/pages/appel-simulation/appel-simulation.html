@@ -1,0 +1,36 @@
+<div class="call-screen">
+  <div class="call-card" *ngIf="statut === 'en_cours'">
+    <div class="call-avatar">
+      <div class="call-avatar-ring"></div>
+      <div class="call-avatar-inner">📞</div>
+    </div>
+
+    <div class="call-info">
+      <div class="call-label">Appel en cours</div>
+      <div class="call-name">Support E·Call</div>
+      <div class="call-sub">Un agent va vous prendre en charge</div>
+    </div>
+
+    <div class="call-timer">{{ dureeFormatee }}</div>
+
+    <div class="call-waves">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <button class="btn-hangup" (click)="raccrocher()">
+      <span>📵</span>
+      Raccrocher
+    </button>
+  </div>
+
+  <div class="call-card call-ended" *ngIf="statut === 'termine'">
+    <div class="call-avatar">
+      <div class="call-avatar-inner ended">✓</div>
+    </div>
+    <div class="call-info">
+      <div class="call-label">Appel terminé</div>
+      <div class="call-name">Durée : {{ dureeFormatee }}</div>
+      <div class="call-sub">Redirection en cours...</div>
+    </div>
+  </div>
+</div>

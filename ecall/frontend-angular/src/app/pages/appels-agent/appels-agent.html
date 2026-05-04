@@ -1,0 +1,82 @@
+<div class="dashboard">
+  <aside class="sidebar">
+    <div class="sidebar-logo">E<span>·</span>Call</div>
+
+    <div class="sidebar-section-label">Mon espace</div>
+    <ul class="sidebar-nav">
+      <li><a routerLink="/agent"><span class="nav-icon">👤</span> Informations</a></li>
+      <li><a routerLink="/agent/appels" class="active"><span class="nav-icon">📞</span> Appels</a></li>
+    </ul>
+
+    <div class="sidebar-spacer"></div>
+    <div class="sidebar-user" *ngIf="agent">
+      <div class="user-avatar">{{ agent.prenom?.charAt(0) }}{{ agent.nom?.charAt(0) }}</div>
+      <div>
+        <div class="user-name">{{ agent.prenom }} {{ agent.nom }}</div>
+        <div class="user-role">Agent</div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="dashboard-main">
+    <div class="dashboard-header">
+      <div>
+        <h1 class="dashboard-title">Appels clients</h1>
+        <p class="dashboard-subtitle">{{ appels.length }} appel(s) enregistré(s)</p>
+      </div>
+      <button class="btn btn-secondary btn-sm" (click)="deconnecter()">Déconnexion</button>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">Liste des appels</div>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Client ID</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th>Statut</th>
+            <!-- <th>Actions</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let appel of appels">
+            <td>#{{ appel.id }}</td>
+            <td>{{ appel.clientId }}</td>
+            <td>{{ appel.description || '—' }}</td>
+            <td>{{ appel.dateAppel | date:'dd/MM/yyyy HH:mm' }}</td>
+            <td>
+              <span class="badge"
+                [class.badge-primary]="appel.statut === 'EN_ATTENTE'"
+                [class.badge-success]="appel.statut === 'EN_COURS'"
+                [class.badge-danger]="appel.statut === 'TERMINE'">
+                {{ appel.statut }}
+              </span>
+            </td>
+            <!-- <td>
+              <div class="action-btns">
+                <button class="btn btn-warning btn-sm"
+                  *ngIf="appel.statut !== 'EN_COURS'"
+                  (click)="changerStatut(appel.id, 'EN_COURS')">
+                  En cours
+                </button>
+                <button class="btn btn-danger btn-sm"
+                  *ngIf="appel.statut !== 'TERMINE'"
+                  (click)="changerStatut(appel.id, 'TERMINE')">
+                  Terminer
+                </button>
+              </div>
+            </td> -->
+          </tr>
+        </tbody>
+      </table>
+      <div class="empty-state" *ngIf="appels.length === 0">
+        <div class="empty-state-icon">📞</div>
+        <div class="empty-state-text">Aucun appel enregistré.</div>
+      </div>
+    </div>
+  </main>
+</div>

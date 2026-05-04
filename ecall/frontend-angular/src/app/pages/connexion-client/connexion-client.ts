@@ -23,7 +23,10 @@ export class ConnexionClient {
       return;
     }
     this.api.connexionClient({ email: this.email, motDePasse: this.motDePasse }).subscribe({
-      next: () => this.router.navigate(['/client']),
+      next: (client) => {
+        localStorage.setItem('client', JSON.stringify(client));
+        this.router.navigate(['/client']);
+      },
       error: () => this.message = 'Identifiants incorrects'
     });
   }

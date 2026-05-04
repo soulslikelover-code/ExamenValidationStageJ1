@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -16,12 +16,12 @@ export class GestionAdministrateurs implements OnInit {
   nom = ''; prenom = ''; email = ''; motDePasse = ''; telephone = '';
   modificationId: number | null = null;
 
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void { this.charger(); }
 
   charger() {
-    this.api.listerAdministrateurs().subscribe({ next: (d) => this.administrateurs = d, error: () => this.administrateurs = [] });
+    this.api.listerAdministrateurs().subscribe({ next: (d) => { this.administrateurs = d; this.cdr.detectChanges(); }, error: () => this.administrateurs = [] });
   }
 
   ajouter() {

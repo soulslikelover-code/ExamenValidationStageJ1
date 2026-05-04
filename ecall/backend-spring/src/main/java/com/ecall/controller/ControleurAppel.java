@@ -22,4 +22,9 @@ public class ControleurAppel {
 
     @GetMapping
     public List<Appel> lister() { return serviceAppel.lister(); }
+
+    @PutMapping("/{id}/statut")
+    public Appel changerStatut(@PathVariable Long id, @RequestParam String statut) {
+        return serviceAppel.changerStatut(id, statut);
+    }
 }

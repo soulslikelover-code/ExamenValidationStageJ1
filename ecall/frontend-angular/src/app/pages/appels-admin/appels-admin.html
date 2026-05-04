@@ -1,0 +1,87 @@
+<div class="dashboard">
+  <aside class="sidebar">
+    <div class="sidebar-logo">E<span>·</span>Call</div>
+
+    <div class="sidebar-section-label">Navigation</div>
+    <ul class="sidebar-nav">
+      <li><a routerLink="/admin"><span class="nav-icon">◉</span> Tableau de bord</a></li>
+      <li><a routerLink="/admin/agents"><span class="nav-icon">👥</span> Agents</a></li>
+      <li><a routerLink="/admin/administrateurs"><span class="nav-icon">⚡</span> Administrateurs</a></li>
+      <li><a routerLink="/admin/clients"><span class="nav-icon">👤</span> Clients</a></li>
+      <li><a routerLink="/admin/appels" class="active"><span class="nav-icon">📞</span> Appels</a></li>
+    </ul>
+
+    <div class="sidebar-spacer"></div>
+    <div class="sidebar-user">
+      <div class="user-avatar">AD</div>
+      <div>
+        <div class="user-name">Administrateur</div>
+        <div class="user-role">Super Admin</div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="dashboard-main">
+    <div class="dashboard-header">
+      <div>
+        <h1 class="dashboard-title">Gestion des appels</h1>
+        <p class="dashboard-subtitle">{{ appels.length }} appel(s) enregistré(s)</p>
+      </div>
+      <a routerLink="/admin" class="btn btn-secondary btn-sm">← Retour</a>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-box">
+        <div class="stat-box-value">{{ nbEnAttente }}</div>
+        <div class="stat-box-label">En attente</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-value" style="color:var(--warning)">{{ nbEnCours }}</div>
+        <div class="stat-box-label">En cours</div>
+      </div>
+      <div class="stat-box stat-box-accent">
+        <div class="stat-box-value" style="color:var(--success)">{{ nbTermine }}</div>
+        <div class="stat-box-label">Terminés</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">Liste des appels</div>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Client ID</th>
+            <th>Agent ID</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th>Statut</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let appel of appels">
+            <td>#{{ appel.id }}</td>
+            <td>{{ appel.clientId || '—' }}</td>
+            <td>{{ appel.agentId || '—' }}</td>
+            <td>{{ appel.description || '—' }}</td>
+            <td>{{ appel.dateAppel | date:'dd/MM/yyyy HH:mm' }}</td>
+            <td>
+              <span class="badge"
+                [class.badge-primary]="appel.statut === 'EN_ATTENTE'"
+                [class.badge-success]="appel.statut === 'EN_COURS'"
+                [class.badge-danger]="appel.statut === 'TERMINE'">
+                {{ appel.statut }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="empty-state" *ngIf="appels.length === 0">
+        <div class="empty-state-icon">📞</div>
+        <div class="empty-state-text">Aucun appel enregistré.</div>
+      </div>
+    </div>
+  </main>
+</div>

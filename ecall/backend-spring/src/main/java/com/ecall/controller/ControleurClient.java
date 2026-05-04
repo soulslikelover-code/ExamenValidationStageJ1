@@ -2,6 +2,7 @@ package com.ecall.controller;
 
 import com.ecall.model.Client;
 import com.ecall.service.ServiceClient;
+import com.ecall.service.ServiceEmail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -12,9 +13,11 @@ import java.util.Optional;
 public class ControleurClient {
 
     private final ServiceClient serviceClient;
+    private final ServiceEmail serviceEmail;
 
-    public ControleurClient(ServiceClient serviceClient) {
+    public ControleurClient(ServiceClient serviceClient, ServiceEmail serviceEmail) {
         this.serviceClient = serviceClient;
+        this.serviceEmail = serviceEmail;
     }
 
     @PostMapping("/inscription")
@@ -23,7 +26,13 @@ public class ControleurClient {
         if (existant.isPresent()) {
             return ResponseEntity.status(409).body("Cet email existe déjà");
         }
-        return ResponseEntity.ok(serviceClient.inscrire(client));
+        Client nouveau = serviceClient.inscrire(client);
+        try {
+            serviceEmail.envoyerEmailBienvenue(nouveau.getEmail(), nouveau.getPrenom());
+        } catch (Exception e) {
+            System.err.println("Erreur envoi email : " + e.getMessage());
+        }
+        return ResponseEntity.ok(nouveau);
     }
 
     @GetMapping

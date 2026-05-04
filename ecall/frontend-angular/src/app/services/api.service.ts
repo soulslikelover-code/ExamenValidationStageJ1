@@ -77,4 +77,8 @@ export class ApiService {
   listerAppels(): Observable<any> {
     return this.http.get(`${this.baseUrl}/appels`);
   }
+
+    changerStatutAppel(id: number, statut: string): Observable<any> {
+    return this.http.put(`${this.baseUrl}/appels/${id}/statut?statut=${statut}`, {});
+  }
 }

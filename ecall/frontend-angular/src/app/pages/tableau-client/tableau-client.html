@@ -1,19 +1,41 @@
-<div class="client-hero">
-  <div class="client-card">
-    <div class="client-greeting">Espace client</div>
-    <h1 class="client-title">Besoin d'aide ?</h1>
-    <p class="client-desc">
-      Notre équipe d'agents est disponible pour vous. Lancez un appel et nous vous répondons rapidement.
-    </p>
+<div class="dashboard">
+  <aside class="sidebar">
+    <div class="sidebar-logo">E<span>·</span>Call</div>
 
-    <button class="btn btn-primary call-button" (click)="lancerAppel()">
-      📞 Lancer un appel
-    </button>
+    <div class="sidebar-section-label">Mon espace</div>
+    <ul class="sidebar-nav">
+      <li><a routerLink="/client" class="active"><span class="nav-icon">📞</span> Lancer un appel</a></li>
+      <li><a routerLink="/client/appels"><span class="nav-icon">📋</span> Mes appels</a></li>
+    </ul>
 
-    <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.06);">
-      <a routerLink="/" class="btn btn-secondary" style="width:100%; justify-content:center;">
-        Se déconnecter
-      </a>
+    <div class="sidebar-spacer"></div>
+    <div class="sidebar-user" *ngIf="client">
+      <div class="user-avatar">{{ client.prenom?.charAt(0) }}{{ client.nom?.charAt(0) }}</div>
+      <div>
+        <div class="user-name">{{ client.prenom }} {{ client.nom }}</div>
+        <div class="user-role">Client</div>
+      </div>
     </div>
-  </div>
+  </aside>
+
+  <main class="dashboard-main">
+    <div class="dashboard-header">
+      <div>
+        <h1 class="dashboard-title">Espace client</h1>
+        <p class="dashboard-subtitle">Bienvenue, {{ client?.prenom }}</p>
+      </div>
+      <a routerLink="/" class="btn btn-secondary btn-sm">Déconnexion</a>
+    </div>
+
+    <div class="client-card" style="max-width:500px">
+      <div class="client-greeting">Support disponible 24/7</div>
+      <h2 class="client-title">Besoin d'aide ?</h2>
+      <p class="client-desc">
+        Notre équipe d'agents est disponible pour vous. Lancez un appel et nous vous répondons rapidement.
+      </p>
+      <button class="btn btn-primary call-button" (click)="lancerAppel()">
+        📞 Lancer un appel
+      </button>
+    </div>
+  </main>
 </div>

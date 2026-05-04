@@ -21,4 +21,10 @@ public class ServiceAppel {
     public List<Appel> lister() {
         return appelRepository.findAll();
     }
+
+        public Appel changerStatut(Long id, String statut) {
+        Appel appel = appelRepository.findById(id).orElseThrow();
+        appel.setStatut(statut);
+        return appelRepository.save(appel);
+    }
 }

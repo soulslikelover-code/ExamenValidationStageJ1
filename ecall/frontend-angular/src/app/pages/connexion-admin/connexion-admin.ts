@@ -8,7 +8,8 @@ import { ApiService } from '../../services/api.service';
   standalone: true,
   imports: [FormsModule, RouterLink],
   templateUrl: './connexion-admin.html',
-  styleUrls: ['../../../styles/auth.css']})
+  styleUrls: ['../../../styles/auth.css']
+})
 export class ConnexionAdmin {
   email = '';
   motDePasse = '';
@@ -22,7 +23,10 @@ export class ConnexionAdmin {
       return;
     }
     this.api.connexionAdmin({ email: this.email, motDePasse: this.motDePasse }).subscribe({
-      next: () => this.router.navigate(['/admin']),
+      next: (res) => {
+        localStorage.setItem('admin', JSON.stringify(res));
+        this.router.navigate(['/admin']);
+      },
       error: () => this.message = 'Identifiants admin incorrects'
     });
   }

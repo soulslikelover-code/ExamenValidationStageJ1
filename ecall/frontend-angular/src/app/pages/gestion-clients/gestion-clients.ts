@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -16,12 +16,12 @@ export class GestionClients implements OnInit {
   modificationId: number | null = null;
   nom = ''; prenom = ''; email = ''; telephone = '';
 
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void { this.charger(); }
 
   charger() {
-    this.api.listerClients().subscribe({ next: (d) => this.clients = d, error: () => this.clients = [] });
+    this.api.listerClients().subscribe({ next: (d) => { this.clients = d; this.cdr.detectChanges(); }, error: () => this.clients = [] });
   }
 
   editer(client: any) {
